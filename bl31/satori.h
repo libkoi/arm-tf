@@ -41,5 +41,4 @@
             : "r"(src));          \
     }
 
-int NINJA_INIT();
-void PMI_handler();
+int SATORI_INIT();

@@ -157,7 +157,8 @@
 	 */
 
 	bl	plat_ic_get_pending_interrupt_id
-	bl 	ninja_interrupt_handler
+	mov x1, x20
+	bl 	GPU_interrupt_handler
 	cmp x0, #114
 	b.eq	interrupt_exit_\label
 	

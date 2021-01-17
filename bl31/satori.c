@@ -1,10 +1,4 @@
 #include "satori.h"
-#define JUNO_IRQ_PMI 34
-#define JUNO_IRQ_PMI_2 38
-#define JUNO_IRQ_PMI_3 50
-#define JUNO_IRQ_PMI_4 54
-#define JUNO_IRQ_PMI_5 58
-#define JUNO_IRQ_PMI_6 62
 
 spinlock_t console_lock;
 #define MY_ERROR(fmt, ...)     \
@@ -23,15 +17,14 @@ void check_current_EL()
     ERROR("[KKK]: CurrentEL=%llu\n", el);
 }
 
-uint32_t ninja_interrupt_handler(unsigned long long iid)
+uint32_t GPU_interrupt_handler(unsigned long long iid, unsigned long long sp)
 {
     if (iid == 64 ||
         iid == 65 ||
         iid == 66 )
     {
-
         spin_lock(&console_lock);
-        ERROR("[Ninja888]: Detected Interrupt, id=%llu\n", iid);
+        ERROR("[KKK]: Detected Interrupt, id=%llu\n", iid);
         spin_unlock(&console_lock);
 
         // // disable PMI
@@ -46,12 +39,14 @@ uint32_t ninja_interrupt_handler(unsigned long long iid)
 
         // uint64_t pid;
         plat_ic_disable_interrupt(iid);
+        MY_ERROR("[KKK]: Interrupt %llu disabled\n", iid);
+
         plat_ic_clear_interrupt_pending(iid);
-        
-        MY_ERROR("[Ninja888]: aaaaaaaaaaaaaaaaaaa");
+        MY_ERROR("[KKK]: Interrupt %llu cleared\n", iid);
+
         check_current_EL();
         // // READ_REG(pid, x4);
-        // MY_ERROR("[Ninja]: Detected PMI, SP=0x%llx\n", sp);
+        MY_ERROR("[KKK]: SP=0x%llx\n", sp);
         // MY_ERROR("[Ninja]: x21=0x%llx\n", *(unsigned long long*)(sp + 0xa8));
         
         // asm volatile("ldr %1, [%0,0xb0] "
@@ -86,6 +81,8 @@ uint32_t ninja_interrupt_handler(unsigned long long iid)
 
         // enable PMI
         plat_ic_enable_interrupt(iid);
+        MY_ERROR("[KKK]: Interrupt %llu enabled\n", iid);
+
         // asm volatile("msr PMINTENSET_EL1, %0"
         //              :
         //              : "r"(1));
@@ -109,17 +106,14 @@ uint32_t ninja_interrupt_handler(unsigned long long iid)
 //     ERROR("[NINJA]: change PMINTENSET_EL1 to %u\n", t);
 // }
 
-int NINJA_INIT()
+int SATORI_INIT()
 {
     MY_ERROR("[KKK]: INIT\n");
-    // MY_ERROR("NINJA INIT BEGIN\n");
     check_current_EL();
     // enable_PMI();
     unsigned int flags = 0;
     set_interrupt_rm_flag(flags, NON_SECURE);
     set_interrupt_rm_flag(flags, SECURE);
-    MY_ERROR("[KKK]: INITED\n");
-
-    // MY_ERROR("NINJA INIT END\n");
+    MY_ERROR("[KKK]: INIT COMPLETED\n");
     return 0;
 }
