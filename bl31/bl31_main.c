@@ -21,6 +21,7 @@
 #include <lib/runtime_instr.h>
 #include <plat/common/platform.h>
 #include <services/std_svc.h>
+#include "satori.h"
 
 #if ENABLE_RUNTIME_INSTRUMENTATION
 PMF_REGISTER_SERVICE_SMC(rt_instr_svc, PMF_RT_INSTR_SVC_ID,
@@ -112,6 +113,10 @@ void bl31_main(void)
 	/* Initialize the runtime services e.g. psci. */
 	INFO("BL31: Initializing runtime services\n");
 	runtime_svc_init();
+
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	NINJA_INIT();
+	//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 	/*
 	 * All the cold boot actions on the primary cpu are done. We now need to

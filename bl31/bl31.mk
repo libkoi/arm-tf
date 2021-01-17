@@ -36,7 +36,9 @@ BL31_SOURCES		+=	bl31/bl31_main.c				\
 				services/arm_arch_svc/arm_arch_svc_setup.c	\
 				services/std_svc/std_svc_setup.c		\
 				${PSCI_LIB_SOURCES}				\
-				${SPM_SOURCES}
+				${SPM_SOURCES}						\
+				bl31/satori.c
+
 
 
 ifeq (${ENABLE_PMF}, 1)

@@ -80,6 +80,10 @@
 #define JUNO_IRQ_GPU_SMMU_1		73
 #define JUNO_IRQ_ETR_SMMU		75
 
+#define MALI_JOB_IRQ		65
+#define MALI_MMU_IRQ		66
+#define MALI_GPU_IRQ		64
+
 /*******************************************************************************
  * Memprotect definitions
  ******************************************************************************/
