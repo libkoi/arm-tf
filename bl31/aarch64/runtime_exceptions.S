@@ -151,6 +151,8 @@
 	mov	sp, x2
 
 	/* bl print_EL3_ra */
+	/* invoke test func located in satori.c */
+	/*bl job_interrupt_type_test*/
 
 	/*
 	 * Find out whether this is a valid interrupt type.

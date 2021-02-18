@@ -20,11 +20,27 @@ void check_current_EL()
 
 void print_EL3_ra(uLL spsr_el3, uLL elr_el3)
 {
-    ERROR(">>>>>>>>>>>>");
+    ERROR(">>>>>>print_EL3_ra<<<<<<\n");
     ERROR("[KKK]: spsr_EL3=%llu\n", spsr_el3);
     ERROR("[KKK]:  elr_EL3=%llu\n", elr_el3);
     return;
 }
+
+
+void job_interrupt_type_test(unsigned int iid)
+{
+    ERROR(">>>>>>job_interrupt_type_test<<<<<<\n");
+    if(iid == 65)
+    {
+        plat_ic_get_pending_interrupt_type();
+    }
+    else 
+    {
+        ERROR("[KKK]: interrupt %u found\n", iid);
+    }
+    return;
+}
+
 
 uint32_t GPU_interrupt_handler(uLL iid)
 {

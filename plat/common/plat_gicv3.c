@@ -81,6 +81,7 @@ uint32_t plat_ic_get_pending_interrupt_type(void)
 	unsigned int irqnr;
 	uint32_t type;
 
+	NOTICE(">>>>>>plat_ic_get_pending_interrupt_type<<<<<<\n")
 	NOTICE("[KKK]: plat_ic_get_pending_interrupt_type: is in EL3? %d\n", IS_IN_EL3());
 
 	assert(IS_IN_EL3());
