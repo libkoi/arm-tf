@@ -87,7 +87,7 @@ uint32_t plat_ic_get_pending_interrupt_type(void)
 	irqnr = gicv3_get_pending_interrupt_type();
 
 	NOTICE("[KKK]: Func gicv3_get_pending_interrupt_id() invoked.");
-	//unsigned int irqnr_id = gicv3_get_pending_interrupt_id();
+	gicv3_get_pending_interrupt_id();
 
 
 	switch (irqnr) {

@@ -150,6 +150,8 @@
 	msr	spsel, #MODE_SP_EL0
 	mov	sp, x2
 
+	/* bl print_EL3_ra */
+
 	/*
 	 * Find out whether this is a valid interrupt type.
 	 * If the interrupt controller reports a spurious interrupt then return
