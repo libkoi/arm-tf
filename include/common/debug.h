@@ -33,6 +33,7 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <lib/spinlock.h>
 
 #include <drivers/console.h>
 
@@ -64,6 +65,13 @@
 #else
 # define ERROR(...)	no_tf_log(LOG_MARKER_ERROR __VA_ARGS__)
 #endif
+
+spinlock_t console_lock;
+
+#define MY_ERROR(fmt, ...)     \
+    spin_lock(&console_lock);  \
+    ERROR(fmt, ##__VA_ARGS__); \
+    spin_unlock(&console_lock)
 
 #if LOG_LEVEL >= LOG_LEVEL_NOTICE
 # define NOTICE(...)	tf_log(LOG_MARKER_NOTICE __VA_ARGS__)

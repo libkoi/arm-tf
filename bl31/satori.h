@@ -20,6 +20,23 @@
 #include <services/std_svc.h>
 #include <bl31/interrupt_mgmt.h>
 
+#include <lib/utils_def.h>
+#include "gic_common_private.h"
+#include "gicv3.h"
+
+
+/* Interrupt group definitions */
+#define INTR_GROUP1S		U(0)
+#define INTR_GROUP0		U(1)
+#define INTR_GROUP1NS		U(2)
+
+spinlock_t console_lock;
+
+#define MY_ERROR(fmt, ...)     \
+    spin_lock(&console_lock);  \
+    ERROR(fmt, ##__VA_ARGS__); \
+    spin_unlock(&console_lock)
+
 #define READ_SYSREG(dst, sysreg) asm("mrs %0, " #sysreg \
                                      : "=r"(dst));
 

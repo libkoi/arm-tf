@@ -348,7 +348,10 @@ unsigned int gicv3_get_pending_interrupt_id(void)
  ******************************************************************************/
 unsigned int gicv3_get_pending_interrupt_type(void)
 {
+	MY_ERROR(">>>>>>gicv3_get_pending_interrupt_type<<<<<<\n");
 	assert(IS_IN_EL3());
+	unsigned long ICC_HPPIR0_EL1 = (uint32_t)read_icc_hppir0_el1();
+	MY_ERROR("[KKK]: ICC_HPPIR0_EL1 = 0x%ld\n", ICC_HPPIR0_EL1);
 	return (uint32_t)read_icc_hppir0_el1() & HPPIR0_EL1_INTID_MASK;
 }
 

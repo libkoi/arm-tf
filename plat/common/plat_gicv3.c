@@ -81,13 +81,13 @@ uint32_t plat_ic_get_pending_interrupt_type(void)
 	unsigned int irqnr;
 	uint32_t type;
 
-	NOTICE(">>>>>>plat_ic_get_pending_interrupt_type<<<<<<\n")
-	NOTICE("[KKK]: plat_ic_get_pending_interrupt_type: is in EL3? %d\n", IS_IN_EL3());
+	MY_ERROR(">>>>>>plat_ic_get_pending_interrupt_type_v3<<<<<<\n");
+	MY_ERROR("[KKK]: plat_ic_get_pending_interrupt_type: is in EL3? %d\n", IS_IN_EL3());
 
 	assert(IS_IN_EL3());
 	irqnr = gicv3_get_pending_interrupt_type();
 
-	NOTICE("[KKK]: Func gicv3_get_pending_interrupt_id() invoked.");
+	MY_ERROR("[KKK]: Func gicv3_get_pending_interrupt_id() invoked.\n");
 	gicv3_get_pending_interrupt_id();
 
 

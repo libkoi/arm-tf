@@ -197,6 +197,10 @@ unsigned int gicv2_get_pending_interrupt_type(void)
 {
 	assert(driver_data != NULL);
 	assert(driver_data->gicc_base != 0U);
+	MY_ERROR(">>>>>>gicv2_get_pending_interrupt_type<<<<<<\n");
+	unsigned int self_GICC_HPPIR = gicc_read_hppir(driver_data->gicc_base);
+
+	MY_ERROR("[KKK]: self_GICC_HPPIR = %d\n", self_GICC_HPPIR);
 
 	return gicc_read_hppir(driver_data->gicc_base) & INT_ID_MASK;
 }

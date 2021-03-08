@@ -65,8 +65,15 @@ uint32_t plat_ic_get_pending_interrupt_id(void)
 uint32_t plat_ic_get_pending_interrupt_type(void)
 {
 	unsigned int id;
-
+	MY_ERROR(">>>>>>plat_ic_get_pending_interrupt_type_v2<<<<<<\n");
 	id = gicv2_get_pending_interrupt_type();
+	MY_ERROR("[KKK]: invoked gicv2_get_pending_interrupt_type, return = %d\n", id);
+	#if GICV2_G0_FOR_EL3
+		MY_ERROR("[KKK]: GICV2_G0_FOR_EL3 = 1");
+	#else
+		MY_ERROR("[KKK]: GICV2_G0_FOR_EL3 = 0");
+	#endif
+	
 
 	/* Assume that all secure interrupts are S-EL1 interrupts */
 	if (id < PENDING_G1_INTID) {

@@ -127,6 +127,8 @@
 	 */
 	.macro	handle_interrupt_exception label
 
+	bl start_routine
+
 	/*
 	 * Save general purpose and ARMv8.3-PAuth registers (if enabled).
 	 * If Secure Cycle Counter is not disabled in MDCR_EL3 when
@@ -150,6 +152,8 @@
 	msr	spsel, #MODE_SP_EL0
 	mov	sp, x2
 
+	bl value_saved
+
 	/* bl print_EL3_ra */
 	/* invoke test func located in satori.c */
 	/*bl job_interrupt_type_test*/
@@ -159,6 +163,7 @@
 	 * If the interrupt controller reports a spurious interrupt then return
 	 * to where we came from.
 	 */
+	bl	start_judge_int_type
 	bl	plat_ic_get_pending_interrupt_type
 	cmp	x0, #INTR_TYPE_INVAL
 	b.eq	interrupt_exit_\label
