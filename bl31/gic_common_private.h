@@ -4,15 +4,12 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-// A Duplicate version for satori.c 
-// original path = arm-reference-platforms/arm-tf/drivers/arm/gic/v3/gicv3_private.h
-
 #ifndef GIC_COMMON_PRIVATE_H
 #define GIC_COMMON_PRIVATE_H
 
 #include <stdint.h>
 
-#include "gic_common.h"
+#include <drivers/arm/gic_common.h>
 #include <lib/mmio.h>
 
 /*******************************************************************************

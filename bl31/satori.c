@@ -35,12 +35,6 @@ void start_judge_int_type(){
     return;
 }
 
-void change(){
-    plat_ic_set_interrupt_type(33, INTR_GROUP0);
-    MY_ERROR(">>>>>>change interrupt GPU_JOB_DONE type<<<<<<\n");
-    return;
-}
-
 void job_interrupt_set_el3(){
     
 }
@@ -66,6 +60,11 @@ void job_interrupt_set_el3(){
 //     MY_ERROR("[KKK]: ICC_HPPIR0_EL1 = 0x%ld\n", ICC_HPPIR0_EL1);
 // }
 
+// was intended to route 65 -> EL3, but nothing happened...?
+void change_65_to_secure(){
+    gicv2_set_interrupt_type(65, GICV2_INTR_GROUP0);
+    MY_ERROR("[KKK]: change interrupt 65 type to GICV2_INTR_GROUP0\n");
+}
 
 uint32_t GPU_interrupt_handler(uLL iid)
 {
@@ -120,11 +119,11 @@ int SATORI_INIT()
 {
     MY_ERROR("[KKK]: INIT\n");
     check_current_EL();
-    // enable_PMI();
     unsigned int flags = 0;
     set_interrupt_rm_flag(flags, NON_SECURE);
     set_interrupt_rm_flag(flags, SECURE);
-    // change();
+    change_65_to_secure();
+    MY_ERROR("-----------------------\n");
     MY_ERROR("[KKK]: INIT COMPLETED\n");
     return 0;
 } 

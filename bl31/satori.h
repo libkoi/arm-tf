@@ -22,7 +22,7 @@
 
 #include <lib/utils_def.h>
 #include "gic_common_private.h"
-#include "gicv3.h"
+#include "gicv2_private.h"
 
 
 /* Interrupt group definitions */
