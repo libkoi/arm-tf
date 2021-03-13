@@ -65,18 +65,21 @@ uint32_t plat_ic_get_pending_interrupt_id(void)
 uint32_t plat_ic_get_pending_interrupt_type(void)
 {
 	unsigned int id;
+	MY_ERROR("----------------\n");
 	MY_ERROR(">>>>>>plat_ic_get_pending_interrupt_type_v2<<<<<<\n");
 	id = gicv2_get_pending_interrupt_type();
-	MY_ERROR("[KKK]: invoked gicv2_get_pending_interrupt_type, return = %d\n", id);
+	MY_ERROR("[KKK]*: invoked gicv2_get_pending_interrupt_type, return = %d\n", id);
 	#if GICV2_G0_FOR_EL3
-		MY_ERROR("[KKK]: GICV2_G0_FOR_EL3 = 1");
+		MY_ERROR("[KKK]: GICV2_G0_FOR_EL3 = 1\n");
 	#else
-		MY_ERROR("[KKK]: GICV2_G0_FOR_EL3 = 0");
+		MY_ERROR("[KKK]: GICV2_G0_FOR_EL3 = 0\n");
 	#endif
 	
 
 	/* Assume that all secure interrupts are S-EL1 interrupts */
 	if (id < PENDING_G1_INTID) {
+		MY_ERROR("[KKK]: Secure signal\n");
+
 #if GICV2_G0_FOR_EL3
 		return INTR_TYPE_EL3;
 #else
@@ -84,9 +87,12 @@ uint32_t plat_ic_get_pending_interrupt_type(void)
 #endif
 	}
 
-	if (id == GIC_SPURIOUS_INTERRUPT)
+	if (id == GIC_SPURIOUS_INTERRUPT){
+		MY_ERROR("[KKK]: Invalid signal (should never be seen)\n");		
 		return INTR_TYPE_INVAL;
+	}
 
+	MY_ERROR("[KKK]: Non-Secure signal\n");
 	return INTR_TYPE_NS;
 }
 

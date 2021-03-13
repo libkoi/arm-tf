@@ -197,7 +197,9 @@ unsigned int gicv2_get_pending_interrupt_type(void)
 {
 	assert(driver_data != NULL);
 	assert(driver_data->gicc_base != 0U);
-	MY_ERROR(">>>>>>gicv2_get_pending_interrupt_type<<<<<<\n");
+	gicv2_get_pending_interrupt_id();
+
+	MY_ERROR(">>>>>>determine gicv2_get_pending_interrupt_type<<<<<<\n");
 	unsigned int self_GICC_HPPIR = gicc_read_hppir(driver_data->gicc_base);
 
 	MY_ERROR("[KKK]: self_GICC_HPPIR = %d\n", self_GICC_HPPIR);
@@ -216,8 +218,11 @@ unsigned int gicv2_get_pending_interrupt_id(void)
 
 	assert(driver_data != NULL);
 	assert(driver_data->gicc_base != 0U);
+	MY_ERROR(">>>>>>acquire gicv2_get_pending_interrupt_id_0<<<<<<\n");
+	MY_ERROR("--------\n");
 
 	id = gicc_read_hppir(driver_data->gicc_base) & INT_ID_MASK;
+	MY_ERROR("[KKK]: pending_interrupt_id = %d\n", id);
 
 	/*
 	 * Find out which non-secure interrupt it is under the assumption that

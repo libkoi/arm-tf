@@ -271,9 +271,13 @@
 	INTR_PROP_DESC(JUNO_IRQ_GPU_SMMU_1, GIC_HIGHEST_SEC_PRIORITY, \
 		(grp), GIC_INTR_CFG_LEVEL), \
 	INTR_PROP_DESC(JUNO_IRQ_ETR_SMMU, GIC_HIGHEST_SEC_PRIORITY, \
+		(grp), GIC_INTR_CFG_LEVEL), \
+	INTR_PROP_DESC(MALI_JOB_IRQ, GIC_HIGHEST_SEC_PRIORITY, \
 		(grp), GIC_INTR_CFG_LEVEL)
 
 #define PLAT_ARM_G0_IRQ_PROPS(grp)	ARM_G0_IRQ_PROPS(grp)
+
+// Our interrupt should not be defined at here, otherwise a kernel panic would occur
 
 /*
  * Required ARM CSS SoC based platform porting definitions

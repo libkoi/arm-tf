@@ -57,9 +57,6 @@ uint32_t plat_ic_get_pending_interrupt_id(void)
 
 	assert(IS_IN_EL3());
 	irqnr = gicv3_get_pending_interrupt_id();
-
-	NOTICE("[KKK]: Interrupt Happens. ID = %llu\n", irqnr);
-
 	return gicv3_is_intr_id_special_identifier(irqnr) ?
 				INTR_ID_UNAVAILABLE : irqnr;
 }
@@ -81,15 +78,8 @@ uint32_t plat_ic_get_pending_interrupt_type(void)
 	unsigned int irqnr;
 	uint32_t type;
 
-	MY_ERROR(">>>>>>plat_ic_get_pending_interrupt_type_v3<<<<<<\n");
-	MY_ERROR("[KKK]: plat_ic_get_pending_interrupt_type: is in EL3? %d\n", IS_IN_EL3());
-
 	assert(IS_IN_EL3());
 	irqnr = gicv3_get_pending_interrupt_type();
-
-	MY_ERROR("[KKK]: Func gicv3_get_pending_interrupt_id() invoked.\n");
-	gicv3_get_pending_interrupt_id();
-
 
 	switch (irqnr) {
 	case PENDING_G1S_INTID:

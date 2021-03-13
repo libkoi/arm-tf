@@ -84,6 +84,8 @@ static inline unsigned int gicc_read_EOIR(uintptr_t base)
 
 static inline unsigned int gicc_read_hppir(uintptr_t base)
 {
+	MY_ERROR(">>>>>>inline function gicc_read_hppir invoked<<<<<<\n");
+	MY_ERROR("[KKK]: from bl31/gicv2_private.h\n");
 	return mmio_read_32(base + GICC_HPPIR);
 }
 
