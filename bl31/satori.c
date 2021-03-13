@@ -1,5 +1,4 @@
 #include "satori.h"
-#define uLL unsigned long long
 
 void check_current_EL()
 {

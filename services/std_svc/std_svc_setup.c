@@ -18,6 +18,12 @@
 #include <services/std_svc.h>
 #include <smccc_helpers.h>
 #include <tools_share/uuid.h>
+#include <services/arm_arch_change_interrupt_type_svc.h>
+
+#include <drivers/arm/tzc400.h>
+#include <plat/arm/common/arm_def.h>
+#include <plat/arm/common/plat_arm.h>
+#include <drivers/arm/tzc_common.h>
 
 /* Standard Service UUID */
 static uuid_t arm_svc_uid = {
@@ -152,4 +158,39 @@ DECLARE_RT_SVC(
 		SMC_TYPE_FAST,
 		std_svc_setup,
 		std_svc_smc_handler
+);
+
+static int32_t change_65_to_secure_init(void)
+{
+	NOTICE("----------------\n");
+    NOTICE("[KKK]: Register CHANGE_65_TO_SECURE handler.\n");
+	NOTICE("----------------\n");
+	return 0;
+}
+
+static uintptr_t change_65_to_secure_handler(uint32_t smc_fid,
+    u_register_t x1,
+    u_register_t x2,
+    u_register_t x3,
+    u_register_t x4,
+    void *cookie,
+    void *handle,
+    u_register_t flags)
+{
+    NOTICE("[KKK]: smc_fid=0x%x\n", smc_fid);
+    NOTICE("Message sent from %s\n", NAME);
+	change_65_to_secure();
+	NOTICE("--------\n");
+	NOTICE("[KKK]: CHANGE_65_TO_SECURE handler invoked successfully.\n");
+	SMC_RET1(handle, SMC_OK);
+}
+
+/* LIU: Register HelloWorld Service */
+DECLARE_RT_SVC(
+	change_65_to_secure,
+	OEN_CHANGE_65_TO_SECURE_START,
+	OEN_CHANGE_65_TO_SECURE_END,
+	SMC_TYPE_FAST,
+	change_65_to_secure_init,
+	change_65_to_secure_handler
 );
