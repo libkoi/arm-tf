@@ -256,6 +256,9 @@ void gicv2_end_of_interrupt(unsigned int id)
 	assert(driver_data != NULL);
 	assert(driver_data->gicc_base != 0U);
 
+	MY_ERROR(">>>>>>invoke gicv2_end_of_interrupt<<<<<<\n");
+	MY_ERROR("++++++++\n");
+
 	gicc_write_EOIR(driver_data->gicc_base, id);
 }
 
@@ -492,6 +495,8 @@ void gicv2_clear_interrupt_pending(unsigned int id)
 	/* SGIs can't be cleared pending */
 	assert(id >= MIN_PPI_ID);
 
+	MY_ERROR(">>>>>>invoke gicv2_clear_interrupt_pending*<<<<<<\n");
+	MY_ERROR("++++++++\n");
 	/*
 	 * Clear pending interrupt, and ensure that any shared variable updates
 	 * depending on out of band interrupt trigger are observed afterwards.

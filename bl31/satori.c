@@ -87,6 +87,11 @@ void start_judge_int_type(){
 //     MY_ERROR("[KKK]: ICC_HPPIR0_EL1 = 0x%ld\n", ICC_HPPIR0_EL1);
 // }
 
+void kr(){
+    MY_ERROR("++++++++++++++++++++++++++++\n");
+    return;
+}
+
 void change_65_to_secure(){
     gicv2_set_interrupt_type(65, GICV2_INTR_GROUP0);
     MY_ERROR("[KKK]: change interrupt 65 type to GICV2_INTR_GROUP0(secure!)\n");
@@ -97,6 +102,17 @@ void change_65_to_non_secure(){
     gicv2_set_interrupt_type(65, GICV2_INTR_GROUP1);
     MY_ERROR("[KKK]: change interrupt 65 type to GICV2_INTR_GROUP1(non_secure!)\n");
     return;
+}
+
+int clear_65(){
+    MY_ERROR("++++++Enter function clear_65++++++\n");
+    gicv2_disable_interrupt(65);
+    MY_ERROR("[KKK]: Interrupt 65 disabled.\n");
+    gicv2_clear_interrupt_pending(65);
+    MY_ERROR("[KKK]: Interrupt 65 cleared.\n");
+    gicv2_enable_interrupt(65);
+    MY_ERROR("[KKK]: Interrupt 65 enabled.\n");
+    return 114;
 }
 
 int SATORI_INIT()
