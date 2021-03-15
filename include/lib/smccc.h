@@ -74,8 +74,6 @@
 
 #define OEN_CHANGE_65_TO_SECURE_START	U(7)
 #define OEN_CHANGE_65_TO_SECURE_END	U(7)
-#define OEN_CHANGE_65_TO_NON_SECURE_START	U(20)
-#define OEN_CHANGE_65_TO_NON_SECURE_END	U(20)
 
 /* Flags and error codes */
 #define SMC_64				U(1)

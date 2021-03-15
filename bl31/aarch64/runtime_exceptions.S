@@ -168,12 +168,14 @@
 	cmp	x0, #INTR_TYPE_INVAL
 	b.eq	interrupt_exit_\label
 
+	/*
 	bl plat_ic_get_pending_interrupt_id
 	cmp x0, #65
 	b.eq	clear_65
 	cmp x0, #114
 	b.eq	interrupt_exit_\label
-
+	*/
+	
 	/*
 	 * Get the registered handler for this interrupt type.
 	 * A NULL return value could be 'cause of the following conditions:

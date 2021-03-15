@@ -1,3 +1,6 @@
+#ifndef SATORI_H
+#define SATORI_H
+
 #include <assert.h>
 #include <string.h>
 
@@ -63,4 +66,6 @@ void check_current_EL();
 void print_EL3_ra(uLL spsr_el3, uLL elr_el3);
 void change_65_to_secure();
 void change_65_to_non_secure();
+int clear_65();
 int SATORI_INIT(); 
+#endif /* SATORI_H */

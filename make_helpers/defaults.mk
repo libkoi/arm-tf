@@ -126,7 +126,7 @@ GENERATE_COT			:= 0
 
 # Hint platform interrupt control layer that Group 0 interrupts are for EL3. By
 # default, they are for Secure EL1.
-GICV2_G0_FOR_EL3		:= 1
+GICV2_G0_FOR_EL3		:= 0
 
 # Route External Aborts to EL3. Disabled by default; External Aborts are handled
 # by lower ELs.
